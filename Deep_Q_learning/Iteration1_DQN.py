@@ -132,8 +132,8 @@ if __name__ == "__main__":
 	Experience = namedtuple('Experience', ['states','actions', 'rewards', 'next_states', 'dones'])
 	
 	# Initialize the policy and target network
-	policy_net = Model(len(env.observation_space), hidden_units, env.action_space.n)
-	target_net = Model(len(env.observation_space), hidden_units, env.action_space.n)
+	policy_net = Model(env.observation_space.n, hidden_units, env.action_space.n)
+	target_net = Model(env.observation_space.n, hidden_units, env.action_space.n)
 	
 	# Copy weights of policy network to target network
 	copy_weights(policy_net, target_net)
