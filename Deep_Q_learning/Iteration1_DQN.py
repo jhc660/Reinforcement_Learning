@@ -149,7 +149,7 @@ if __name__ == "__main__":
 		losses = []
 
 		for timestep in itertools.count():
-			# Take action and observe next_stae, reward and done signal
+			# Take action and observe next_state, reward and done signal
 			action, rate, flag = agent.select_action(state, policy_net)
 			next_state, reward, done, _ = env.step(action)
 			ep_rewards += reward
