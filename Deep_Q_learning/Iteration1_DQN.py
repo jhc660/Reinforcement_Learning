@@ -1,5 +1,5 @@
 import gym
-import gym_tictac4
+import gym_tictactoe
 import time
 import math
 import random
@@ -116,7 +116,7 @@ if __name__ == "__main__":
 	hidden_units = [200,200]
 
 	# Initialize the environment
-	env = gym.make('tictac4-v0')
+	env = gym.make('TicTacToe-v0')
 
 	""" 
 	Notice that we are not using any function to make the states discrete here as DQN 
