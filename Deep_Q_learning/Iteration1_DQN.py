@@ -173,7 +173,7 @@ if __name__ == "__main__":
 			
 				# Calculate Loss function and gradient values for gradient descent
 				with tf.GradientTape() as tape:
-					q_s_a = tf.math.reduce_sum(policy_net(states)) * tf.one_hot(actions, 1), axis=1)
+					q_s_a = tf.math.reduce_sum(policy_net(states) * tf.one_hot(actions, 1), axis=1)
 					loss = tf.math.reduce_mean(tf.square(q_s_a_target - q_s_a))
 
 				# Update the policy network weights using ADAM
