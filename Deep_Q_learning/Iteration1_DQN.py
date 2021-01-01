@@ -1,4 +1,5 @@
 import gym
+import gym_tictac4
 import time
 import math
 import random
