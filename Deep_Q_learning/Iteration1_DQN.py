@@ -167,13 +167,13 @@ if __name__ == "__main__":
 				states, actions, rewards, next_states, dones = np.asarray(batch[0]),np.asarray(batch[1]),np.asarray(batch[3]),np.asarray(batch[2]),np.asarray(batch[4])
 				
 				# Calculate TD-target
-				q_s_a_prime = np.max(target_net(np.atleast_2d(next_states).astype('float32')), axis = 1)
+				q_s_a_prime = np.max(target_net(next_states), axis = 1)
 				q_s_a_target = np.where(dones, rewards, rewards+gamma*q_s_a_prime)
-				q_s_a_target = tf.convert_to_tensor(q_s_a_target, dtype = 'float32')		
+				q_s_a_target = tf.convert_to_tensor(q_s_a_target, dtype = 'int')		
 			
 				# Calculate Loss function and gradient values for gradient descent
 				with tf.GradientTape() as tape:
-					q_s_a = tf.math.reduce_sum(policy_net(np.atleast_2d(states).astype('float32')) * tf.one_hot(actions, env.action_space.n), axis=1)
+					q_s_a = tf.math.reduce_sum(policy_net(states)) * tf.one_hot(actions, 1), axis=1)
 					loss = tf.math.reduce_mean(tf.square(q_s_a_target - q_s_a))
 
 				# Update the policy network weights using ADAM
