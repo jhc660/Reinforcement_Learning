@@ -132,14 +132,14 @@ if __name__ == "__main__":
 	Experience = namedtuple('Experience', ['states','actions', 'rewards', 'next_states', 'dones'])
 	
 	# Initialize the policy and target network
-	policy_net = Model(len(env.observation_space.sample()), hidden_units, env.action_space.n)
-	target_net = Model(len(env.observation_space.sample()), hidden_units, env.action_space.n)
+	policy_net = Model(len(env.observation_space), hidden_units, env.action_space.n)
+	target_net = Model(len(env.observation_space), hidden_units, env.action_space.n)
 	
 	# Copy weights of policy network to target network
 	copy_weights(policy_net, target_net)
 
 	optimizer = tf.optimizers.Adam(lr)
-	epochs = 10000
+	epochs = 100
 
 	total_rewards = np.empty(epochs)
 
