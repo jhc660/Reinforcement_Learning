@@ -90,7 +90,7 @@ class DQN_Agent():
 		if rate > random.random():
 			return random.randrange(self.num_actions), rate, True
 		else:
-			return np.argmax(policy_net(np.atleast_2d(np.atleast_2d(state).astype('float32')))), rate, False
+			return np.argmax(policy_net(np.atleast_2d(np.atleast_2d(state).astype('int')))), rate, False
 
 def copy_weights(Copy_from, Copy_to):
 	"""
