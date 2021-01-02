@@ -91,8 +91,8 @@ class DQN_Agent():
 			return random.randrange(self.num_actions), rate, True
 		else:
                         print(state)
-                        flattenedState = [element for tupl in state for element in tupl]
-                        print(flattenedState)
+                        fState = flattenState(tupleState)
+                        print(fState)
                         return np.argmax(policy_net(flattenState(state))), rate, False
 
 def flattenState(tupleState):
