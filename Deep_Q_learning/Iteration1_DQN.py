@@ -90,17 +90,17 @@ class DQN_Agent():
 		if rate > random.random():
 			return random.randrange(self.num_actions), rate, True
 		else:
-                        return np.argmax(policy_net(convertState(state))), rate, False
+                        return np.argmax(policy_net(np.atleast_2d(convertState(state)))), rate, False
 
 def convertStates(tupleStates):
         stateList = [convertState(element) for element in tupleStates]
         print(stateList)
-        return np.atleast_2d(stateList)
+        return stateList
 
 def convertState(tupleState):
         flatList = [element for tupl in tupleState for element in tupl]
         flatList = [1 if element=='O' else 2 if element=='X' else element for element in flatList]
-        return np.atleast_2d(flatList)
+        return flatList
 
 def copy_weights(Copy_from, Copy_to):
 	"""
@@ -185,7 +185,7 @@ if __name__ == "__main__":
 			
 				# Calculate Loss function and gradient values for gradient descent
 				with tf.GradientTape() as tape:
-					q_s_a = tf.math.reduce_sum(policy_net(convertState(states)) * tf.one_hot(actions, 1), axis=1)
+					q_s_a = tf.math.reduce_sum(policy_net(np.atleast_2d(convertStates(states))) * tf.one_hot(actions, 1), axis=1)
 					loss = tf.math.reduce_mean(tf.square(q_s_a_target - q_s_a))
 
 				# Update the policy network weights using ADAM
