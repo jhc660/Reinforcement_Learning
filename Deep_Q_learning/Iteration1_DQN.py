@@ -173,8 +173,7 @@ if __name__ == "__main__":
 				
 				# Calculate TD-target
 				print("nextStates")
-				print(convertState(next_states))
-				print(np.atleast_2d(convertState(next_states)))
+				print(next_states)
 				q_s_a_prime = np.max(target_net(np.atleast_2d(convertState(next_states))), axis = 1)         
 				q_s_a_target = np.where(dones, rewards, rewards+gamma*q_s_a_prime)
 				q_s_a_target = tf.convert_to_tensor(q_s_a_target, dtype = 'int')		
