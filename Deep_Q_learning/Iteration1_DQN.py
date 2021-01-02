@@ -92,6 +92,11 @@ class DQN_Agent():
 		else:
                         return np.argmax(policy_net(convertState(state))), rate, False
 
+def convertStates(tupleStates):
+        stateList = [convertState(element) for element in tupleStates]
+        print(stateList)
+        return np.atleast_2d(stateList)
+
 def convertState(tupleState):
         flatList = [element for tupl in tupleState for element in tupl]
         flatList = [1 if element=='O' else 2 if element=='X' else element for element in flatList]
@@ -174,7 +179,7 @@ if __name__ == "__main__":
 				# Calculate TD-target
 				print("nextStates")
 				print(next_states)
-				q_s_a_prime = np.max(target_net(np.atleast_2d(convertState(next_states))), axis = 1)         
+				q_s_a_prime = np.max(target_net(np.atleast_2d(convertStates(next_states))), axis = 1)         
 				q_s_a_target = np.where(dones, rewards, rewards+gamma*q_s_a_prime)
 				q_s_a_target = tf.convert_to_tensor(q_s_a_target, dtype = 'int')		
 			
