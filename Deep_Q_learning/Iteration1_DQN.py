@@ -90,10 +90,8 @@ class DQN_Agent():
 		if rate > random.random():
 			return random.randrange(self.num_actions), rate, True
 		else:
-                        whatisthis = policy_net(state)
                         print("error: bad output?")
                         print(state)
-                        print(whatisthis)
 		return np.argmax(policy_net(state)), rate, False
 
 def copy_weights(Copy_from, Copy_to):
