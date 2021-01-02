@@ -96,7 +96,7 @@ class DQN_Agent():
                         return np.argmax(policy_net(flattenState(state))), rate, False
 
 def flattenState(tupleState):
-        return [element for tupl in tupleState for element in tupl]
+        return tuple(element for tupl in tupleState for element in tupl)
 
 def copy_weights(Copy_from, Copy_to):
 	"""
