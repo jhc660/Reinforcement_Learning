@@ -90,7 +90,7 @@ class DQN_Agent():
 		if rate > random.random():
 			return random.randrange(self.num_actions), rate, True
 		else:
-                        return np.argmax(policy_net(np.atleast_2d(convertState(state)))), rate, False
+                        return np.argmax(policy_net(np.atleast_2d(convertState(state)).astype('float32'))), rate, False
 
 def convertStates(tupleStates):
         stateList = [convertState(element) for element in tupleStates]
@@ -179,13 +179,13 @@ if __name__ == "__main__":
 				# Calculate TD-target
 				print("nextStates")
 				print(next_states)
-				q_s_a_prime = np.max(target_net(np.atleast_2d(convertStates(next_states))), axis = 1)         
+				q_s_a_prime = np.max(target_net(np.atleast_2d(convertStates(next_states)).astype('float32')), axis = 1)         
 				q_s_a_target = np.where(dones, rewards, rewards+gamma*q_s_a_prime)
-				q_s_a_target = tf.convert_to_tensor(q_s_a_target, dtype = 'int')		
+				q_s_a_target = tf.convert_to_tensor(q_s_a_target, dtype = 'float32')		
 			
 				# Calculate Loss function and gradient values for gradient descent
 				with tf.GradientTape() as tape:
-					q_s_a = tf.math.reduce_sum(policy_net(np.atleast_2d(convertStates(states))) * tf.one_hot(actions, 1), axis=1)
+					q_s_a = tf.math.reduce_sum(policy_net(np.atleast_2d(convertStates(states)).astype('float32')) * tf.one_hot(actions, 1), axis=1)
 					loss = tf.math.reduce_mean(tf.square(q_s_a_target - q_s_a))
 
 				# Update the policy network weights using ADAM
