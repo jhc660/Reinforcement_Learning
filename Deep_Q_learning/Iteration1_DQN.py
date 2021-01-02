@@ -91,9 +91,9 @@ class DQN_Agent():
 			return random.randrange(self.num_actions), rate, True
 		else:
                         print(state)
-                        fState = flattenState(state)
+                        fState = convertState(state)
                         print(fState)
-                        return np.argmax(policy_net(flattenState(state))), rate, False
+                        return np.argmax(policy_net(convertState(state))), rate, False
 
 def convertState(tupleState):
         flatList = [element for tupl in tupleState for element in tupl]
