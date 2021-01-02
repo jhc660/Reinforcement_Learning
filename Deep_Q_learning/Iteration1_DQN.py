@@ -97,6 +97,7 @@ class DQN_Agent():
 
 def convertState(tupleState):
         flatList = [element for tupl in tupleState for element in tupl]
+        flatList = [1 if x=='O' else 2 if x=='X' else x for x in a]
         return np.atleast_2d(flatList)
 
 def copy_weights(Copy_from, Copy_to):
