@@ -94,7 +94,6 @@ class DQN_Agent():
 
 def convertStates(tupleStates):
         stateList = [convertState(element) for element in tupleStates]
-        print(stateList)
         return stateList
 
 def convertState(tupleState):
@@ -177,8 +176,6 @@ if __name__ == "__main__":
 				states, actions, rewards, next_states, dones = np.asarray(batch[0]),np.asarray(batch[1]),np.asarray(batch[3]),np.asarray(batch[2]),np.asarray(batch[4])
 				
 				# Calculate TD-target
-				print("nextStates")
-				print(next_states)
 				q_s_a_prime = np.max(target_net(np.atleast_2d(convertStates(next_states)).astype('float32')), axis = 1)         
 				q_s_a_target = np.where(dones, rewards, rewards+gamma*q_s_a_prime)
 				q_s_a_target = tf.convert_to_tensor(q_s_a_target, dtype = 'float32')		
