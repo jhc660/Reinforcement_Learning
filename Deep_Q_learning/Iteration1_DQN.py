@@ -148,7 +148,7 @@ if __name__ == "__main__":
 	copy_weights(policy_net, target_net)
 
 	optimizer = tf.optimizers.Adam(lr)
-	epochs = 100
+	epochs = 10000
 
 	total_rewards = np.empty(epochs)
 
