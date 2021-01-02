@@ -134,8 +134,8 @@ if __name__ == "__main__":
 	Experience = namedtuple('Experience', ['states','actions', 'rewards', 'next_states', 'dones'])
 	
 	# Initialize the policy and target network
-	policy_net = Model(env.observation_space.n, hidden_units, 1)
-	target_net = Model(env.observation_space.n, hidden_units, 1)
+	policy_net = Model(env.observation_space.n, hidden_units, 2)
+	target_net = Model(env.observation_space.n, hidden_units, 2)
 	
 	# Copy weights of policy network to target network
 	copy_weights(policy_net, target_net)
@@ -175,7 +175,7 @@ if __name__ == "__main__":
 			
 				# Calculate Loss function and gradient values for gradient descent
 				with tf.GradientTape() as tape:
-					q_s_a = tf.math.reduce_sum(policy_net(states) * tf.one_hot(actions, 1), axis=1)
+					q_s_a = tf.math.reduce_sum(policy_net(states) * tf.one_hot(actions, 2), axis=1)
 					loss = tf.math.reduce_mean(tf.square(q_s_a_target - q_s_a))
 
 				# Update the policy network weights using ADAM
