@@ -97,7 +97,7 @@ class DQN_Agent():
 
 def flattenState(tupleState):
         flatList = [element for tupl in tupleState for element in tupl]
-        return np.array(tupleState)
+        return np.array(flatList)
 
 def copy_weights(Copy_from, Copy_to):
 	"""
