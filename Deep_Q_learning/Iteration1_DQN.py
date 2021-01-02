@@ -90,9 +90,13 @@ class DQN_Agent():
 		if rate > random.random():
 			return random.randrange(self.num_actions), rate, True
 		else:
-                        print("error: bad output?")
                         print(state)
-		return np.argmax(policy_net(state)), rate, False
+                        flattenedState = [element for tupl in state for element in tupl]
+                        print(flattenedState)
+                        return np.argmax(policy_net(flattenState(state))), rate, False
+
+def flattenState(tupleState):
+        return [element for tupl in tupleState for element in tupl]
 
 def copy_weights(Copy_from, Copy_to):
 	"""
@@ -134,8 +138,8 @@ if __name__ == "__main__":
 	Experience = namedtuple('Experience', ['states','actions', 'rewards', 'next_states', 'dones'])
 	
 	# Initialize the policy and target network
-	policy_net = Model(env.observation_space.n, hidden_units, 2)
-	target_net = Model(env.observation_space.n, hidden_units, 2)
+	policy_net = Model(env.observation_space.n, hidden_units, 1)
+	target_net = Model(env.observation_space.n, hidden_units, 1)
 	
 	# Copy weights of policy network to target network
 	copy_weights(policy_net, target_net)
