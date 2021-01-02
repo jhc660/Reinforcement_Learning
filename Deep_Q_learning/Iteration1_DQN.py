@@ -122,7 +122,7 @@ if __name__ == "__main__":
 	memory_size = 100000
 	lr = 0.01
 	num_episodes = 1000
-	hidden_units = [200,200]
+	hidden_units = [20,20]
 
 	# Initialize the environment
 	env = gym.make('TicTacToe-v0')
