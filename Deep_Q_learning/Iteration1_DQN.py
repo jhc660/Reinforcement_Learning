@@ -90,6 +90,8 @@ class DQN_Agent():
 		if rate > random.random():
 			return random.randrange(self.num_actions), rate, True
 		else:
+                        whatisthis = policy_net(state)
+                        print(whatisthis);
 			return np.argmax(policy_net(state)), rate, False
 
 def copy_weights(Copy_from, Copy_to):
@@ -167,7 +169,7 @@ if __name__ == "__main__":
 				states, actions, rewards, next_states, dones = np.asarray(batch[0]),np.asarray(batch[1]),np.asarray(batch[3]),np.asarray(batch[2]),np.asarray(batch[4])
 				
 				# Calculate TD-target
-				q_s_a_prime = np.max(target_net(next_states), axis = 1)
+				q_s_a_prime = np.max(target_net(next_states), axis = 1)         
 				q_s_a_target = np.where(dones, rewards, rewards+gamma*q_s_a_prime)
 				q_s_a_target = tf.convert_to_tensor(q_s_a_target, dtype = 'int')		
 			
